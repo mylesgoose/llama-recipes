@@ -20,7 +20,7 @@ class train_config:
     num_epochs: int=1
     max_train_step: int=0
     max_eval_step: int=0
-    num_workers_dataloader: int=1
+    num_workers_dataloader: int=16
     lr: float=1e-4
     weight_decay: float=0.0
     gamma: float= 0.85 # multiplicatively decay the learning rate by gamma after each epoch
@@ -32,13 +32,13 @@ class train_config:
     peft_method: str = "lora" # None, llama_adapter (Caution: llama_adapter is currently not supported with FSDP)
     use_peft: bool=False # use parameter efficient fine tuning
     from_peft_checkpoint: str="" # if not empty and use_peft=True, will load the peft checkpoint and resume the fine-tuning on that checkpoint
-    output_dir: str = "./finetuned_model/PEFT/model"
+    output_dir: str = "PATH/to/save/PEFT/model"
     freeze_layers: bool = False
     num_freeze_layers: int = 1
     quantization: str = None
     one_gpu: bool = False
     save_model: bool = True
-    dist_checkpoint_root_folder: str="./finetuned_model" # will be used if using FSDP
+    dist_checkpoint_root_folder: str="PATH/to/save/FSDP/model" # will be used if using FSDP
     dist_checkpoint_folder: str="fine-tuned" # will be used if using FSDP
     save_optimizer: bool=False # will be used if using FSDP
     use_fast_kernels: bool = False # Enable using SDPA from PyTroch Accelerated Transformers, make use Flash Attention and Xformer memory-efficient kernels
@@ -47,6 +47,7 @@ class train_config:
     flop_counter: bool = False # Enable flop counter to measure model throughput, can not be used with pytorch profiler at the same time.
     flop_counter_start: int = 3 # The step to start profiling, default is 3, which means after 3 steps of warmup stage, the profiler will start to count flops.
     use_profiler: bool = False # Enable pytorch profiler, can not be used with flop counter at the same time.
-    profiler_dir: str = "./finetuned_model/profiler/results" # will be used if using profiler
+    profiler_dir: str = "PATH/to/save/profiler/results" # will be used if using profiler
     checkpoint_interval: int = 500  # Steps interval to save checkpoints
     max_checkpoints_to_keep: int = 2  # Maximum number of checkpoints to keep
+
